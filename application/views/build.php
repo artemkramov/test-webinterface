@@ -38,7 +38,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         /**
                          * @var ResponseTest $historyData
                          */
-                        $isErrorRow = $historyData->result != 'success' && $historyData->isNecessary ? true: false;
+                        $isErrorRow = $historyData->result != 'success' && $historyData->isNecessary ? true : false;
                         ?>
                         <tr class="<?= $isErrorRow ? 'error-row' : '' ?>">
                             <td>
@@ -60,6 +60,24 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <!-- SCHEMA DATA -->
         <? if (isset($schema) && is_array($schema)): ?>
             <div class="schema-wrapper">
+                <!-- LEGEND -->
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <fieldset class="scheduler-border">
+                                <legend class="scheduler-border">Legend</legend>
+                                <div class="control-group">
+                                    Left column contains fields from schema (/cgi/tbl), right column - fields from data
+                                    (/cgi/tbl/{TableName}). All incorrect fields marked with <b style="color: red">red
+                                        bold font</b>. By default just all tables which contain error are shown. They are marked with red color. To view
+                                    all tables click on button "Show all tables".
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+                <!-- END LEGEND -->
+
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="form-group">
@@ -68,6 +86,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         </div>
                     </div>
                 </div>
+
                 <? foreach ($schema as $schemaData): ?>
                     <? $errors = $schemaErrors[$schemaData->id]; ?>
                     <? $isValid = empty($errors['errors']) && empty($errors['warnings']) && empty($errors['wrongFields']['schema']) && empty($errors['wrongFields']['data']) ?>
